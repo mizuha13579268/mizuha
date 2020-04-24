@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>js解析json数据示例</title>
+<input type="text" name="put" id="put" style="width: 100%" />
+<button onclick="aS()">确定</button>
+<button onclick="re()">重置</button>
+<div name="div" id="div" style="width: 100%;height:50%"></div>
+    <script>
+
+ // 将JSON数据存储在JS变量中
+
+ var json = '[{"A": "下面哪个不是picker组件mode属性的合法值", "Q": "year" },'
+             +
+             '{"A": "以下关于text组件叙述错误的是", "Q": "各个操作系统的空格标准一致。"},'
+             +
+             '{"A": "下面哪个不是progress组件属性", "Q": "type"},'
+             +
+             '{"A": "下面哪个不是input的confirm-type属性合法值", "Q": "fly"},'//
+             +
+             '{"A": "下面哪个不是textarea的有效属性", "Q": "type"},'
+             +
+             '{"A": "下面哪个不是input的type属性合法值", "Q": "phone"},'
+             +
+             '{"A": "下面哪项不是switch组件的属性", "Q": "value"},'
+             +
+             '{"A": "下面哪个属性在picker组件中是根据mode值生效的", "Q": "range"},'
+             +
+             '{"A": "如图所示，icon的type类型的正确顺序是", "Q": "success_no_circle, warn, info, cancel, waiting, download"},'
+             +
+             '{"A": "下面哪个组件label不能绑定", "Q": "input"},'
+             +
+             '{"A": "下面哪个不是button组件open-type属性合法", "Q": "launchapp"},'
+             +
+             '{"A": "slider滑块如图所示，颜色参数配置是哪一项？", "Q": "activeColor=ff0000 backgroundColor=0000ff block-color=00ff00"},'
+             
+             +
+             '{"A": "下面关于rich-text的叙述错误的", "Q": "attrs属性既支持id，也支持class 。"},'
+             +
+             '{"A": "下面哪个不是button组件的type属性合法值", "Q": "error"},'
+             +
+             '{"A": "组件基础内容https://developers.weixin.qq.com/miniprogram/dev/component/icon.html表单组件https://developers.weixin.qq.com/miniprogram/dev/component/button.html选a", "Q": "a"},'
+             +
+             '{"A": "rich-text支持的html标签有哪些？", "Q": "img,li,table,span"},'
+             +
+             '{"A": "下面哪些button属性，当button的open-type=contact时有效", "Q": "session-from,send-message-title(,send-message-path,send-message-img,show-message-card,bindcontact"},'
+             +
+             '{"A": "form组件能提交哪些组件的内容这个需要写代码验证。", "Q": "switch,input,checkbox,slider,radio,picker,textarea"},'
+             +
+             '{"A": "rich-text组件space属性的合法值有哪些？这个不能只看文档，写代码尝试一下才行。参考https://www.jb51.net/onlineread/htmlchar.htm  html特殊字符", "Q": "ensp,emsp,nbsp,thinsp"},'
+             +
+             '{"A": "下面哪些不是button组件的form-type属性合法值", "Q": "delete,update"},'
+            
+             +
+             '{"A": "input是原生组件", "Q": "√"},'
+             +
+             '{"A": "picker-view是嵌入页面的滚动选择器。其中只可放置picker-view-column组件，其它节点不会显示。", "Q": "√"},'
+             +
+             '{"A": "radio组件的color属性设置的是单选框被选中的颜色", "Q": "√"},'
+             +
+             '{"A": "label组件用来改进表单组件的可用性。使用for属性找到对应的id，或者将控件放在该标签下，当点击label时，就会触发对应的控件。效果是点击label标签包含的区域相当于，点击绑定的控件。", "Q": "√"},'
+             +
+             '{"A": "textarea是原生组件", "Q": "√"},'
+             +
+             '{"A": "扫码需要设置camera组件哪个属性？", "Q": "mode"},'
+             +
+             '{"A": "video组件在非全屏模式下，是否开启亮度与音量调节手势的属性是哪个？", "Q": "vslide-gesture"},'
+             +
+             '{"A": "流量主的开通条件，累计独立访客(UV)不低于", "Q": "1000"},'
+             +
+             '{"A": "第一张图片是原图，以下四张图片的缩放模式是", "Q": "scaleToFit，top，center，bottomRight"},'
+             +
+             '{"A": "下面哪些是camera的device-position属性合法值", "Q": "front"},'
+             +
+             '{"A": "image组件的默认宽度和高度。", "Q": "300px，240px"},'
+             +
+             '{"A": "广告自动刷新的时间间隔必须大于", "Q": "30秒"},'
+             +
+             '{"A": "下面哪个属性不属于map组件", "Q": "location"},'
+             +
+             '{"A": "组件 导航https://developers.weixin.qq.com/miniprogram/dev/component/functional-page-navigator.html组件 媒体https://developers.weixin.qq.com/miniprogram/dev/component/audio.html组件 地图https://developers.weixin.qq.com/miniprogram/dev/component/map.html组件 画布https://developers.weixin.qq.com/miniprogram/dev/component/canvas.html组件 开放能力https://developers.weixin.qq.com/miniprogram/dev/component/ad.html选a", "Q": "a"},'
+             +
+             '{"A": "下面哪个不是camera的flash属性合法值", "Q": "close"},'
+             +
+             '{"A": "map组件的marker标注点有多个显示标记点文字提示的属性，哪个属性可以不用点击标注点就能显示标注点文字信息？", "Q": "callout"},'
+             +
+             '{"A": "video组件是否显示视频底部控制栏的播放按钮的属性是哪个？", "Q": "show-play-btn"},'
+             +
+             '{"A": "map组件的marker属性的callout是自定义标记点上方的气泡窗口，当设置callout后，哪个属性将被忽略？", "Q": "title"},'
+             +
+             '{"A": "map组件必填的属性有哪些？", "Q": "longitude,latitude"},'
+            
+             +
+             '{"A": "canvas组件的type属性支持哪两种类型 ", "Q": "2d,webgl"},'
+             +
+             '{"A": "面哪些是navigator组件的open-type属性合法值", "Q": ""},'
+             +
+             '{"A": "image组件支持的文件格式有哪些？", "Q": "JPG,PNG,SVG,WEBP,GIF"},'
+             +
+             '{"A": "若要通过open-data组件获取群名称，目前是需要较复杂的操作。先通过小程序的分享功能转发到群聊，微信用户从群聊中点击转发信息打开小程序，在小程序页面的onLoad回调函数的options中获取shareTicket，调用wx.getShareInfo获得包括敏感数据在内的完整转发信息的加密数据，通过解密算法解密或者云调用，即可获得微信用户所在的群聊id。", "Q": "√"},'
+             +
+             '{"A": "official-account是公众号关注组件。当用户扫小程序码打开小程序时，开发者可在小程序内配置公众号关注组件，方便用户快捷关注公众号，可嵌套在原生组件内。使用offical-account组件前，需前往小程序后台，在“设置”->“关注公众号”中设置要展示的公众号。设置的公众号需与小程序主体一致。", "Q": "√"},'
+             +
+             '{"A": "map组件的polyline和polygons属性的数据类型都是数组，数组的每一项就是一个多边形折线或多边形", "Q": "√"},'
+             +
+             '{"A": "map 组件使用的经纬度是火星坐标系，调用 wx.getLocation 接口需要指定 type 为 gcj02", "Q": "√"},'
+             +
+             '{"A": "WXS有几种注释方法？", "Q": "3"},'
+             +
+             '{"A": "下面关于src属性叙述错误的是", "Q": "src属性可以用来外联引用其他的wxml文件模块。"},'
+             +
+             '{"A": "下面关于wxs模块叙述错误的是", "Q": "WXS代码可以编写在wxs文件中的<wxs>标签内，或以.wxs为后缀名的文件内。"},'
+           
+             +
+             '{"A": "下面哪个不是WXS的Math库方法", "Q": "push"},'
+             +
+             '{"A": "以下关于module叙述错误的是", "Q": "module属性值的命名与javascript的命名规则相同"},'
+             +
+             '{"A": "以下关于WXS变量叙述错误的是", "Q": "WXS中的变量均为地址引用。"},'
+             +
+             '{"A": "WXS语法参考https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/01wxs-module.htmlWXS语法参考 变量 运算符https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/02variate.htmlWXS语法参考 基础类库https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/07basiclibrary.html组件 视图容器https://developers.weixin.qq.com/miniprogram/dev/component/cover-image.html选a", "Q": "a"},'
+             +
+             '{"A": "swiper-item和swiper是微信小程序的轮播图，下面哪个不是swiper组件的属性。", "Q": "horizontal"},'
+             +
+             '{"A": "下面关于require函数叙述错误的是", "Q": "require只能引用.wxs文件模块，可以使用绝对路径。"},'
+             +
+             '{"A": "下面哪个不是WXS的数据类型", "Q": "geo 地理位置"},'
+             +
+             '{"A": "下面哪个不是WXS的Date库方法", "Q": "toJSON()("},'
+            
+             +
+             '{"A": "movable-area和movable-view，是微信小程序可移动视图。下面哪一项不是movable-view的属性", "Q": "scale-auto"},'
+             +
+             '{"A": "scroll-view是可滚动视图区域。使用竖向滚动时，需要给scroll-view一个固定高度，通过WXSS设置height。组件属性的长度单位默认为px，2.4.0起支持传入单位(rpx/px)。下面哪个不是它的属性", "Q": "autoplay"},'
+             +
+             '{"A": "下面哪个不是WXS的Math库属性", "Q": "Q"},'
+             +
+             '{"A": "下面哪些不是WXS保留字？", "Q": "import,export"},'
+             
+             +
+             '{"A": "以下哪些不是WXS的运算符", "Q": "** 指数运算,?: 三元运算"},'
+             +
+             '{"A": "cover-view和cover-image可覆盖的原生组件有哪些？", "Q": "map,video,canvas,camera,live-player,live-pusher"},'
+             +
+             '{"A": "下面哪些是WXS的全局方法", "Q": "parseFloat(),isNaN(),encodeURI(),encodeURIComponent()"},'
+             +
+             '{"A": " <wxs>模块只能在定义模块的WXML文件中被访问到。使用<include>或 <import>时，<wxs>模块不会被引入到对应的WXML文件中。<template>标签中，只能使用定义该 <template> 的WXML文件中定义的<wxs>模块。", "Q": "√"},'
+             +
+             '{"A": "JSON库的parse()函数将object对象转换为JSON字符串，并返回该字符串。", "Q": "×"},'
+             +
+             '{"A": "console是一个全局对象可以直接访问，用于打印日志，有几个打印日志的方法？", "Q": "5"},'
+             
+             +
+             '{"A": "小程序框架接口 基础功能https://developers.weixin.qq.com/miniprogram/dev/reference/api/wx.htmlWXML语法参考 数据绑定https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/data.htmlWXML语法参考 列表渲染https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/list.html选a", "Q": "a"},'
+             +
+             '{"A": "微信小程序的数据绑定，可以在Mustache内直接进行组合，构成新的对象或数组。下面哪项不是组合", "Q": "<view>{{object.key}}</view>"},'
+             +
+             '{"A": "下面哪个方法是设定一个定时器。在定时到期以后执行注册的回调函数。", "Q": "setTimeout"},'
+             +
+             '{"A": "使用哪两个属性可以指定数组当前元素和当前下标的变量名", "Q": "wx:for-item，wx:for-index"},'
+            
+             +
+             '{"A": "wx是小程序API全局对象，用于承载小程序能力相关API。wx的属性有哪些？这题要写代码 console.log(wx)，在console窗口查看wx对象的所有属性，并展开内容。", "Q": "env,error,version,cloud"},'
+            
+             +
+             '{"A": "当 wx:for 的值为字符串时，会将字符串解析成字符串数组", "Q": "√"},'
+             
+             +
+             '{"A": "setTimeout和setInterval函数都会返回一个数字，是定时器的编号，可以用来取消定时器。", "Q": "√"},'
+             +
+             '{"A": "在组件上使用 wx:for 控制属性绑定一个数组，即可使用数组中各项的数据重复渲染该组件。", "Q": "√"},'
+             
+             +
+             '{"A": "默认数组的当前项的下标变量名默认为item，数组当前项的变量名默认为index", "Q": "×"},'
+             +
+             '{"A": "一般来说，wx:if有更高的切换消耗而hidden有更高的初始渲染消耗。", "Q": "√"},'
+             +
+             '{"A": "如不提供wx:key，微信开发者工具会报一个warning，如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略。", "Q": "√"},'
+             +
+             '{"A": "数据绑定使用Mustache语法(双大括号{{}})将变量包起来", "Q": "√"},'
+             +
+             '{"A": "import有作用域的概念，即只会import目标文件中定义的template，而不会import目标文件import的template。", "Q": "√"},'
+             +
+             '{"A": "类似block wx:if，也可以将wx:for用在<block/>标签上，以渲染一个包含多节点的结构块。", "Q": "√"},'
+             +
+             '{"A": "setTimout和setInterval都可以传入3个以上的不定长参数，第3个及之后的参数是传给回调函数的。", "Q": "√"},'
+             +
+             '{"A": "模板拥有自己的作用域，只能使用data传入的数据以及模板定义文件中定义的<wxs />模块", "Q": "√"},'
+             +
+             '{"A": "WXML中的动态数据均来自对应Page的data。", "Q": "√"},'
+             +
+             '{"A": "sss","Q":"sss"},'
+
+
+             +
+             '{"A": "下面哪个不是腾讯开放平台的组成部分", "Q": "微博开放平台"},' 
+             + 
+                  '{"A": "下面哪个不是微信开放平台的组成部分", "Q": "QQ小程序开发"},' 
+                  +
+                  '{"A": "下面哪个不是微信公众平台账号类型", "Q": "视频号"},'
+                   +
+                  '{"A": "下面哪个不是微信小程序的特点", "Q": "可以完全控制手机功能"},' 
+                  +
+                  '{"A": "小程序名称一年内能修改几次", "Q": "2次"},'
+                   +
+                  '{"A": "订阅号推文在后台哪个栏目创建", "Q": "管理"},' 
+                  +
+                  '{"A": "订阅号能绑定多少个运营者", "Q": "25"},'
+                   +
+                  '{"A": "小程序后台哪个栏目下可以找到appid", "Q": "开发"},'
+                   +
+                  '{"A": "微信开发者工具我们应该下载哪种版本", "Q": "Stable Build"},'
+                   +
+                  '{"A": "下面哪个不是微信开发者工具的快捷按钮", "Q": "解释器"},'
+                   +
+                  '{"A": "微信开发者工具无法编写哪种项目", "Q": "thinkphp"},'
+                   +
+                  '{"A": "微信开发者工具不能清除哪种缓存", "Q": "cookie"},'
+                  +
+                  '{"A":"SSSSS","Q":"SSSSSS"},'
+                  +
+                   '{"A": "小程序框架视图层https: //developers.weixin.qq.com/miniprogram/dev/framework/view/", "Q": "选A"},'
+                  +               
+'{"A": "下面哪个不是WXML的能力？", "Q": "模块化"},'
++
+'{"A": "微信小程序的尺寸单位，rpx(responsive pixel):可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。请计算2019年9月发布的最新版iphone的rpx与px的换算。iPhone 11：Liquid 视网膜高清显示屏，6.1 英寸 (对角线) LCD 全面屏，1792 x 828 像素分辨率，326 ppi。iPhone 11 Pro Max ：超视网膜 XDR 显示屏，6.5 英寸 (对角线) OLED 全面屏，2688 x 1242 像素分辨率，458 ppi", "Q": "iPhone11 1rpx = 1.104px;iPhone11 Pro Max 1rpx = 1.656px"},'+
+
+ '{"A": "下面对WXS叙述错误的是", "Q": "WXS依赖于运行时的基础库版本，低版本需做兼容处理。"},'
+ +
+ '{"A": "下面对微信小程序事件叙述错误的是", "Q": "事件是逻辑层到视图层的通讯方式。"},'
+ +
+ '{"A": "下面关于使用WXS函数响应事件的叙述错误的是", "Q": "绑定的WXS函数必须用()括起来"},'
+ +
+ '{"A": "下面哪个事件不是冒泡事件", "Q": "input"},'
+ +
+ '{"A": "下面哪个不是bind事件的合法绑定方式？", "Q": ":tap"},'
+ +
+ '{"A": "下面哪个不是BaseEvent基础事件对象属性", "Q": "bind"},'
+ +
+ '{"A": "下面关于mark描述错误的是", "Q": "如果存在同名的mark,子节点的mark会被父节点覆盖。"},'+
+ '{"A": "事件对象的触控属性中，距离页面可显示区域(屏幕除去导航条)左上角距离，横向点数的是？", "Q": "clientX"},'+
+ '{"A": "事件对象的哪些属性有dataset属性？", "Q": "target,currentTarget"},'+
+ '{"A": "WXML(WeiShui Markup Language)是框架设计的一套标签语言，结合基础组件、事件系统，可以构建出页面的结构.[", "Q": "x"},'+
+ '{"A": "组件上支持使用 style、class 属性来控制组件的样式。", "Q": "√"},'+
+ '{"A": "class用于指定样式规则，其属性值是样式规则中类选择器名样式类名的集合，样式类名不需要带上.，样式类名之间用分号分隔。", "Q": "x"},'+
+ '{"A": "定义在app.wxss中的样式为全局样式，作用于每一个页面。在page的wxss文件中定义的样式为局部样式，只作用在对应的页面，并会覆盖app.wxss中相同的选择器。", "Q": "√"},'+
+ '{"A": "WXSS使用import语句可以导入外联样式表，import后跟需要导入的外联样式表的相对路径，用;表示语句结束。", "Q": "x"},'+
+ '{"A": "WXS(WeiXin Script)是小程序的一套脚本语言，结合 WXML，可以构建出页面的结构。", "Q": "√"},'+
+ '{"A": "微信小程序的事件要在组件中绑定一个事件处理函数，并在相应的Page定义中写上相应的事件处理函数，参数是event。", "Q": "√"},'+
+ '{"A": "微信小程序视图层的事件分为冒泡事件和非冒泡事件", "Q": "√"},'+
+ '{"A": "如无特殊说明，当组件触发事件时，逻辑层绑定该事件的处理函数会收到一个事件对象。", "Q": "√"},'+
+ '{"A": "canvas中的触摸事件不可冒泡，所以没有currentTarget。", "Q": "√"},'+
+ '{"A": "在组件节点中可以附加一些自定义数据。这样，在事件中可以获取这些自定义的节点数据，用于事件的逻辑处理。在WXML中，这些自定义数据以data-开头，多个单词由连字符-连接。这种写法中，连字符写法会转换成驼峰写法，而大写字符会自动转成小写字符。", "Q": "√"},'+
+ '{"A": "touches是一个数组，每个元素为一个Touch对象(canvas触摸事件中携带的touches是CanvasTouch数组)。表示当前停留在屏幕上的触摸点。", "Q": "√"},'+
+ '{"A": "detail是自定义事件所携带的数据，如表单组件的提交事件会携带用户的输入，媒体的错误事件会携带错误信息。", "Q": "√"},'+
+ '{"A": "事件对象的timeStamp属性是页面打开到触发事件所经过的秒数。", "Q": "x"},'+
+ //6
+ '{"A": "小程序运行时：https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/env.html小程序基础能力 网络https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html小程序基础能力 存储https://developers.weixin.qq.com/miniprogram/dev/framework/ability/storage.html", "Q": "A"},'+
+ '{"A": "基于Mobile Chrome内核的XWeb引擎是微信小程序在哪个平台上的视图层运行环境？", "Q": "android"},'+
+ '{"A": "JavaScriptCore是微信小程序在哪个平台上的javascript代码的运行引擎？", "Q": "ios"},'+
+ '{"A": "小程序服务域名设置共有几类，每类最多设置几个域名？", "Q": "5,20"},'+
+ '{"A": "在小程序后台-开发-开发设置-服务器域名中的request合法域名加入了一条记录，内容是：https://myserver.com:8080，下面那些URL可以使用wx.request这个API成功发送请求。", "Q": "https://myserver.com:8080/myapi"},'
+ +
+ '{"A": "在小程序后台-开发-开发设置-服务器域名中的request合法域名加入了一条记录，内容是：https://myserver.com，下面那些URL可以使用wx.request这个API成功发送请求。", "Q": "https://myserver.com/myapi"},'+
+ '{"A": "微信小程序已经支持了绝大部分的ES6API，但以下几项API支持的不完整，部分平台上不支持。", "Q": "String.prototype.normalize(),Array.prototype.values(),Array.prototype.includes(),Proxy"},'+
+ '{"A": "以下关于微信小程序退出状态保存的叙述正确的是。", "Q": "如果超过expireTimeStamp，保存的数据将被丢弃，且冷启动时不遵循restartStrategy的配置，而是直接从首页冷启动。,expireTimeStamp有可能被自动提前，如微信客户端需要清理数据的时候。,在小程序存活期间，onSaveExitState可能会被多次调用，此时以最后一次的调用结果作为最终结果。,在某些特殊情况下(如微信客户端直接被系统杀死)，这个方法将不会被调用，下次冷启动也不遵循restartStrategy的配置，而是直接从首页冷启动。"},'
+ +
+ '{"A": "每个微信小程序都可以有自己的本地缓存，可以通过哪些API对本地缓存进行读写和清理。", "Q": "wx.setStorage/wx.setStorageSync(,wx.getStorage/wx.getStorageSync,wx.clearStorage/wx.clearStorageSync,wx.removeStorage/wx.removeStorageSync"},'+
+ '{"A": "基于安全考虑，小程序中不支持动态执行JS代码，即：不支持使用eval执行JS代码；不支持使用new Function创建函数", "Q": "√"},'+
+ '{"A": "如果用户已经打开过某小程序，然后在一定时间内再次打开该小程序，此时小程序并未被销毁，只是从后台状态进入前台状态，这个过程就是冷启动", "Q": "x"},'+
+ '{"A": "当用户点击右上角胶囊按钮关闭小程序，或者按了设备Home键离开微信时，小程序完全终止运行，并不进入后台状态。", "Q": "x"},'+
+ '{"A": "当小程序进入后台，可以会维持一小段时间的运行状态，如果这段时间内都未进入前台，小程序会被销毁。当小程序占用系统资源过高，可能会被系统销毁或被微信客户端主动回收。", "Q": "√"},'
+ +
+ '{"A": "每当小程序可能被销毁之前，页面回调函数exitState会被调用。如果想保留页面中的状态，可以在这个回调函数中“保存”一些数据，下次启动时可以通过onSaveExitState获得这些已保存数据。", "Q": "x"},'
+
+ +
+ '{"A":"开发者在后台发布新版本之后，无法立刻影响到所有现网用户，但最差情况下，在小程序发布之后48小时之内下发新版本信息到用户。用户下次打开时会先更新最新版本再打开。小程序每次冷启动时，都会检查是否有更新版本，如果发现有新版本，将会异步下载新版本的代码包，并同时用客户端本地的包进行启动，即新版本的小程序需要等下一次冷启动才会应用上。", "Q": "x"},'
+ +
+ '{"A": "小程序服务器域域名不能使用IP地址(小程序的局域网IP除外)或 localhost，域名必须经过 ICP 备案，只支持https (wx.request、wx.uploadFile、wx.downloadFile) 和wss (wx.connectSocket) 协议。", "Q": "√"},'+
+ '{"A": "小程序进入后台运行后，如果60s内网络请求没有结束，会回调错误信息 fail interrupted；在回到前台之前，网络请求接口调用都会无法调用。", "Q": "x"},'+
+ '{"A": "只要成功接收到服务器返回，无论statusCode是多少，都会进入success回调", "Q": "√"},'+
+ '{"A": "在微信开发者工具中，可以临时开启开发环境不校验请求域名、TLS版本及HTTPS证书选项，跳过服务器域名的校验。此时，在微信开发者工具中及手机开启调试模式时，不会进行服务器域名的校验。", "Q": "√"},'+
+ '{"A": "同一个微信用户，同一个小程序storage上限为100MB。storage以用户维度隔离，同一台设备上，A用户无法读取到B用户的数据；不同小程序之间也无法互相读写数据", "Q": "x"},'+
+ '{"A": "本地缓存的清理时机跟代码包一样，只有在代码包被清理的时候本地缓存才会被清理。", "Q": "√"},'
+ +
+ //7
+ '{"A": "仅在当前生命周期内有效，重启之后即不可用的文件类型是？", "Q": "本地临时文件"},'+
+ '{"A": "有完全自由的读写权限的文件类型是", "Q": "本地用户文件"},'+
+ '{"A": "canvas组件的哪个属性用于创建绘图上下文", "Q": "canvas-id"},'+
+ '{"A": "创建绘图上下文的API是？", "Q": "wx.createCanvasContext()("},'+
+ '{"A": "单个分包/主包的大小限制，整个小程序所有分包的大小限制是？", "Q": "2M，12M"},'+
+ '{"A": "微信小程序文件主要分为哪两大类?", "Q" :"代码包文件：代码包文件指的是在项目目录中添加的文件。,本地文件：通过调用接口本地产生，或通过网络下载下来，存储到本地的文件。"},'+
+ '{"A": "微信小程序的本地文件分为哪三大类 ？", "Q": "本地临时文件：临时产生，随时会被回收的文件。不限制存储大小。,本地缓存文件：小程序通过接口把本地临时文件缓存后产生的文件，不能自定义目录和文件名。跟本地用户文件共计，普通小程序最多可存储 10MB，游戏类目的小程序最多可存储 50MB。,本地用户文件：小程序通过接口把本地临时文件缓存后产生的文件，允许自定义目录和文件名。跟本地缓存文件共计，普通小程序最多可存储 10MB，游戏类目的小程序最多可存储 50MB。"},'
+ +
+ '{"A": "app.json的分包设置subpackages属性中有哪几个设置项？", "Q": "root String 分包根目录,name String 分包别名，分包预下载时可以使用,pages StringArray 分包页面路径，相对与分包根目录,independent Boolean 分包是否是独立分包"},'+
+ '{"A": "微信小程序打包原则描述正确的是", "Q": "声明subpackages后，将按subpackages配置路径进行打包，subpackages配置路径外的目录将被打包到app(主包)中,app(主包)也可以有自己的pages(即最外层的pages字段),subpackage的根目录不能是另外一个subpackage内的子目录,tabBar页面必须在app(主包)内"},'+
+ '{"A": "文件系统是小程序提供的一套以小程序和用户维度隔离的存储以及一套相应的管理接口。通过FileSystemManager可以获取到全局唯一的文件系统管理器，所有文件系统的管理操作通过wx.getFileSystemManager()来调用。", "Q": "x"},'+
+ '{"A": "由于代码包文件大小限制，代码包文件适用于放置首次加载时需要的文件，对于内容较大或需要动态替换的文件，不推荐用添加到代码包中，推荐在小程序启动之后再用下载接口下载到本地。", "Q": "√"},'
+ 
+ +
+ '{"A": "代码包文件的访问方式是从项目根目录开始写文件路径，支持相对路径的写法。如：/a/b/c、a/b/c 和 ./a/b/c ../a/b/c 都是合法的。", "Q": "x"},'+
+ '{"A": "代码包内的文件可以在运行后动态修改或删除", "Q":"x"},'
+ +
+ '{"A": "微信小程序的本地文件以用户维度隔离。即同一台手机，每个微信用户不能访问到其他登录用户的文件，同一个用户不同appId之间的文件也不能互相访问。", "Q": "√"},'+
+ '{"A": "本地临时文件、本地缓存文件和本地用户文件的清理时机跟代码包一样，只有在代码包被清理的时会被清理。", "Q": "x"},'+
+ '{"A": "所有在canvas中的画图必须用JavaScript完成", "Q": "√"},'
+ +
+ '{"A": "canvas的坐标系是在一个二维的网格当中，右上角的坐标为(0, 0)。", "Q": "x"},'+
+ '{"A": "渐变能用于填充一个矩形，圆，线，文字等。填充色只能是固定的一种颜色。", "Q": "x"},'+
+ '{"A": "每个使用分包小程序必定含有一个主包。所谓的主包，即放置默认启动页面/TabBar页面，以及一些所有分包都需用到公共资源/JS脚本；而分包则是根据开发者的配置进行划分。在小程序启动时，默认会下载主包并启动主包内页面，当用户进入分包内某个页面时，客户端会把对应分包下载下来，下载完成后再进行展示。", "Q": "√"},'+
+ '{"A": "分包内的页面只能引用所在分包或主包内的js文件、template文件和资源文件。", "Q": "√"},'
+ +
+ //8
+ '{"A": "哪个配置项指定需要引用的扩展库。", "Q": "useExtendedLib"},'+
+ '{"A": "哪个配置项设置聊天位置消息用打车类小程序打开？", "Q": "entranceDeclare"},'+
+ '{"A": "哪个配置项设置跳转到其他小程序的appId列表？", "Q": "navigateToMiniProgramAppIdList"},'+
+ '{"A": "小程序的tabBar的按钮最少几个，最多几个？", "Q": "2,5"},'+
+ '{"A": "搜一搜的结果页的场景值是", "Q": "1053"},'+
+ '{"A": "下面哪个不是tabBar的项目list的配置项？", "Q": "color"},'+
+ '{"A": "下面哪个不是window的配置项？", "Q": "permission"},'+
+ '{"A": "哪个配置项声明了小程序使用的插件。", "Q": "plugins"},'+
+ '{"A": "下面哪个不是tabBar的配置项", "Q": "backgroundTextStyle"},'+
+ '{"A": "长按图片识别小程序码的场景值是?", "Q": "1048"},'+
+ '{"A": "浮窗打开小程序的场景值是?", "Q":"1131"},'
+ +
+ '{"A": "下面哪个不是networkTimeout的配置项？", "Q": "response"},'
+ +
+ '{"A": "扫描手机相册中选取的二维码的场景值是?", "Q": "1013"},'
+ +
+
+ '{"A": "requiredBackgroundModes申明需要后台运行的能力，类型为数组。目前支持哪些项目？", "Q": "audio: 后台音乐播放,location: 后台定位"},'+
+ '{"A": "下面哪些不是app.json的配置项？", "Q": "windows,tarBars"},'+
+ '{"A": "页面配置与window配置项目都有的配置项有哪些？", "Q": "navigationBarBackgroundColor,navigationBarTextStyle,navigationBarTitleText,navigationStyle,backgroundColor,backgroundColorTop,backgroundColorBottom"},'
+ +
+ '{"A": "在app.json的usingCompnents处声明的自定义组件视为全局自定义组件，在小程序内的页面或自定义组件中可以直接使用而无需再声明。", "Q": "√"},'+
+ '{"A": "每一个小程序页面也可以使用.json文件来对本页面的窗口表现进行配置。页面中配置项在当前页面不会覆盖app.json的window中相同的配置项。", "Q": "×"},'+
+ '{"A": "pages用于指定小程序由哪些页面组成，每一项都对应一个页面的路径(含文件名) 信息。文件名不需要写文件后缀，框架会自动去寻找对于位置的 .json, .js, .wxml, .wxss四个文件进行处理。数组的第一项代表小程序的初始页面(首页)。小程序中新增/减少页面，都需要对pages数组进行修改。", "Q": "√"},'+
+ '{"A": "可以在开发者工具中开启debug模式，在开发者工具的控制台面板，调试信息以info的形式给出，其信息有Page的注册，页面路由，数据更新，事件触发等。可以帮助开发者快速定位一些常见的问题。", "Q": "√"},'
+ +
+//9
+ '{"A": "哪个配置项指定需要引用的扩展库。", "Q": "useExtendedLib"},'+
+ '{"A": "哪个配置项设置聊天位置消息用打车类小程序打开？", "Q": "entranceDeclare"},'+
+ '{"A": "哪个配置项设置跳转到其他小程序的appId列表？", "Q": "navigateToMiniProgramAppIdList"},'+
+ '{"A": "小程序的tabBar的按钮最少几个，最多几个？", "Q": "2，5"},'+
+ '{"A": "搜一搜的结果页的场景值是", "Q": "1053"},'
+ +
+ '{"A": "下面哪个不是tabBar的项目list的配置项？", "Q": "color"},'+
+ '{"A": "下面哪个不是window的配置项？", "Q": "permission"},'+
+ '{"A": "哪个配置项声明了小程序使用的插件。", "Q": "plugins"},'+
+ '{"A": "下面哪个不是tabBar的配置项", "Q": "backgroundTextStyle"},'+
+ '{"A": "长按图片识别小程序码的场景值是?", "Q": "1048"},'+
+ '{"A": "浮窗打开小程序的场景值是?", "Q": "1131"},'
+ +
+ '{"A": "下面哪个不是networkTimeout的配置项？", "Q": "response"},'+
+ '{"A": "扫描手机相册中选取的二维码的场景值是?", "Q": "1013"},'
+ +
+ '{"A": "requiredBackgroundModes申明需要后台运行的能力，类型为数组。目前支持哪些项目？", "Q": "audio: 后台音乐播放,location: 后台定位"},'
+ +
+ '{"A": "下面哪些不是app.json的配置项？", "Q": "windows,tarBars"},'
+ +
+ '{"A": "页面配置与window配置项目都有的配置项有哪些？", "Q": "navigationBarBackgroundColor,navigationBarTextStyle,navigationBarTitleText,navigationStyle,backgroundColor,backgroundColorTop,backgroundColorBottom"},'+
+ '{"A": "在app.json的usingCompnents处声明的自定义组件视为全局自定义组件，在小程序内的页面或自定义组件中可以直接使用而无需再声明。", "Q": "√"},'+
+ '{"A": "每一个小程序页面也可以使用.json文件来对本页面的窗口表现进行配置。页面中配置项在当前页面不会覆盖app.json的window中相同的配置项。", "Q": "×"},'+
+ '{"A": "pages用于指定小程序由哪些页面组成，每一项都对应一个页面的路径(含文件名) 信息。文件名不需要写文件后缀，框架会自动去寻找对于位置的 .json, .js, .wxml, .wxss四个文件进行处理。数组的第一项代表小程序的初始页面(首页)。小程序中新增/减少页面，都需要对pages数组进行修改。", "Q": "√"},'+
+ '{"A": "可以在开发者工具中开启debug模式，在开发者工具的控制台面板，调试信息以info的形式给出，其信息有Page的注册，页面路由，数据更新，事件触发等。可以帮助开发者快速定位一些常见的问题。", "Q": "√"},'
+ +
+
+
+                   '{"A": "新建小程序项目时后端服务有哪些可选？", "Q": "小程序·开发,腾讯云"},' +
+                  '{"A": "新建小程序项目时，appid可以吗为空吗？", "Q": "×"},' +
+                  '{"A": "一个小程序从开发完到上线的几个重要步骤正确的顺序是：1.发布，2.提交审核，3.预览，4.上传代码", "Q": "3->4->2->1"},' +
+                  '{"A": "下面哪个不是小程序项目成员的身份？", "Q": "体验成员"},' +
+                  '{"A": "运营者、开发者和数据分析者都可以有的权限是？", "Q": "体验者权限,登录"},' +
+                  '{"A": "一个小程序页面由四个文件组成，分别是", "Q": ".js，必须的，负责页面逻辑,.wxml，必须的，负责页面结构,.json，不是必须的，负责页面配置,.wxss，不是必须的，负责页面样式表"},' +
+                  '{"A": "在项目目录中，哪些文件会编译，上传之后无法直接访问到。", "Q": ".js,app.json,.wxml(仅针对在app.json中配置了的页面),.wxss(仅针对在app.json中配置了的页面)"},' +
+                  '{"A": "小程序的版本有几种状态？", "Q": "开发版本,体验版本,审核中版本,线上版本"},' +
+                  '{"A": "微信小程序，只有后缀名在白名单内的文件可以被上传，不在白名单列表内文件在开发工具能被访问到，但无法被上传。下面哪些后缀在白名单中。", "Q": ".jpeg,.mp4,.png"},' +
+                  '{"A": "一个小程序主体部分由哪三个文件组成，必须放在项目的根目录。", "Q": "app.js,app.json,app.wxss"},' +
+                  '{"A": "由于Android系统限制，目前还无法获取到按 Home 键退出到桌面，然后从桌面再次进小程序的场景值，对于这种情况，会保留上一次的场景值。", "Q": "√"},' +
+                  '{"A": "后台页面收录设置，可对特定页面的索引进行关闭。sitemap配置可对整个小程序的索引进行关闭", "Q": "×"},' +
+                  '{"A": "小程序根目录下的 app.json 文件用来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。", "Q": "√"},' 
+                  +
+                  '{"A": "对于小游戏，可以在 wx.getLaunchOptionsSync 和 wx.onShow 中获取上述场景值", "Q": "√"},' +
+                  '{"A": "部分场景值下还可以获取来源应用、公众号或小程序的appId。", "Q": "√"},' +
+                  '{"A": "每一个小程序页面也可以使用同名 .json 文件来对本页面的窗口表现进行配置，页面中配置项会覆盖 app.json 的 window 中相同的配置项。", "Q": "√"},' +
+                  '{"A": "对于小程序，可以在App的onLaunch和onShow，或wx.getLaunchOptionsSync中获取场景值。", "Q": "√"},' +
+                  '{"A": "场景值用来描述用户进入小程序的路径，就是用户通过什么方式进入小程序的", "Q": "√"},' +
+                  '{"A": "在小程序的平台里，开发者完成开发之后，把网页代码和资源上传到服务器上，即可同步更新系统。", "Q": "×"},' +
+                  '{"A": "小程序没有sitemap.json则默认所有页面都不能被索引", "Q": "×"},' +
+                  '{"A": "微信现已开放小程序内搜索，开发者可以通过 sitemap.json 配置，或者管理后台页面收录开关来配置其小程序页面是否允许微信索引。", "Q": "√"},' +
+                  '{"A": "为了方便开发者减少配置项，微信小程序描述页面的四个文件可以有不同的路径与文件名", "Q": "×"},' +
+                  '{"A": "下面关于微信小程序逻辑层描述错误的是？", "Q": "小程序框架的逻辑层运行在浏览器中，因此JavaScript的DOM API都可使用，如访问window，document对象。"},' +
+                  '{"A": "小程序Page实例有几个生命周期回调？", "Q": "6"},' +
+                  '{"A": "分析小程序生命周期示意图，当视图线程(View Thread)第一次渲染完成后(First Render)，并发送通知给逻辑层线程(AppService Thread)，这时哪个生命周期回调函数将被调用？", "Q": "onReady"},' +
+                  '{"A": "哪一种路由方式会发生页面全部出栈，只留下新的页面的结果？", "Q": "重加载"},' +
+                  '{"A": "可以使用哪个函数获取当前页面栈？", "Q": "getCurrentPages()"},' +
+                  '{"A": "以下关于路由操作的叙述错误的", "Q": "路由后页面都会触发onShow生命周期函数"},' +
+                  '{"A": "腾讯在小程序逻辑层上增加了哪些功能，以方便程序的开发。", "Q": "增加APP和Page方法，进行程序注册和页面注册。,增加getApp和getCurrentPages方法，分别用来获取App实例和当前页面栈。,提供丰富的API，如微信用户数据，扫一扫，支付等微信特有功能。,提供模块化能力，每个页面有独立的作用域。"},' +
+                  '{"A": "小程序注册页面的构造器有", "Q": "Page(),Component()"},' +
+                  '{"A": "哪些路由方式会发生新页面入栈的结果", "Q": "初始化,打开新页面,页面重定向"},' +
+                  '{"A": "每个小程序都需要在app.js中调用App方法注册小程序实例，绑定生命周期回调函数、错误监听和页面不存在监听函数等。", "Q": "√"},' 
+                  +
+                  '{"A": "整个小程序只有一个App实例，是全部页面共享的。开发者可以通过getApp方法获取到全局唯一的App实例，获取App上的数据或调用开发者注册在App上的函数。", "Q": "√"},' +
+                  '{"A": "对于小程序中的每个页面，都需要在页面对应的js文件中进行注册，指定页面的初始数据、生命周期回调、事件处理函数等。", "Q": "√"},' +
+                  '{"A": "behaviors()可以用来让多个页面有相同的数据字段和方法。", "Q": "√"},' +
+                  '{"A": "Page构造器适用于简单的页面。但对于复杂的页面，Page构造器可能并不好用。此时，可以使用Component构造器来构造页面。Component构造器的主要区别是：方法需要放在components:{ }里面。", "Q": "×"},' +
+                  '{"A": "在小程序中所有页面的路由全部由框架进行管理，框架以队列的形式维护了当前的所有页面。", "Q": "×"},' +
+                  '{"A": "微信小程序中可以将一些公共的代码抽离成为一个单独的js文件，作为一个模块。模块只有通过module.exports或者exports才能对外暴露接口。在需要使用这些模块的文件中，使用require将公共代码引入。[", "Q": "√"},' +
+                  '{"A": "微信小程序的文件作用域是指在JavaScript文件中声明的变量和函数只在该文件中有效；不同的文件中可以声明相同名字的变量和函数，不会互相影响。", "Q": "√"},' 
+                  +
+                  '{"A": "微信小程序的事件监听API，以on开头的API用来监听某个事件是否触发，如：wx.onSocketOpen，wx.onCompassChange 等。这类API接受一个回调函数作为参数，当事件触发时会调用这个回调函数，并将相关数据以参数形式传入。", "Q": "√"},' +
+                  '{"A": "微信小程序大多数API都是异步API，执行结果需要通过Object类型的参数中传入的对应回调函数获取。微信小程序同步API的执行结果可以通过函数返回值直接获取，如果执行出错会抛出异常。有些异步API也有返回值。", "Q": "√"},'
+                   +
+                  '{"A": "路由方式和触发时机连线", "Q": "初始化：小程序打开的第一个页面"},'
+                  
+                  
+                 
+                   +
+                  '{"A": "下面哪个不是App()参数对象的属性？", "Q": "onStart"},' +
+                  '{"A": "自定义转发内容的图片可以是哪些来源，支持哪些格式，长宽比是多少？", "Q": "onStart"},' +
+                  '{"A": "下面哪个不是App()参数对象的属性？", "Q": "本地文件、网络图片、云图片；jpg、png；5：4"},' +
+                  '{"A": "下面哪个不是Page()参数对象的属性？", "Q": "onLaunch"},'
+                   +
+                  '{"A": "监听用户上拉触底事件的回调函数是哪一个？", "Q": "onReachBottom"},' +
+                  '{"A": "点击tab时触发哪个事件", "Q": "onStart"},' +
+                  '{"A": "下面哪个不是App()参数对象的属性？", "Q": "onTabItemTap"},' +
+                  '{"A": "监听用户下拉刷新事件的回调函数是哪一个？", "Q": "onPullDownRefresh"},' +
+                  '{"A": "页面不存在监听函数是哪个?", "Q": "onPageNotFound"},' +
+                  '{"A": "下面哪个回调函数全局只触发一次", "Q": "onLaunch"},' +
+                  '{"A": "只有定义了哪个事件处理函数，右上角菜单才会显示“转发”按钮？", "Q": "onStart"},' +
+                  '{"A": "下面哪个不是App()参数对象的属性？", "Q": "onShareAppMessage"},' +
+                  '{"A": "一个页面只会调用一次的生命周期回调函数有哪些？", "Q": "onLoad,onReady,onUnload"},'
+                   +
+                  '{"A": "setData数用于将数据从逻辑层发送到视图层(异步)，同时改变对应的this.data的值(同步)。下面对setData叙述正确的是？", "Q": "直接修改this.data而不调用 this.setData 是无法改变页面的状态的，还会造成数据不一致。,setData仅支持设置可JSON化的数据。,单次设置的数据不能超过1024kB，请尽量避免一次设置过多的数据。,请不要把data中任何一项的value设为 undefined，否则这一项将不被设置并可能遗留一些潜在问题。"},' +
+                  '{"A": "下面哪些不是生命周期回调?", "Q": "onError,onPageNotFound,onHandledRejection"},' +
+                  '{"A": "onShareAppMessage转发回调函数需要return一个Object，用于自定义转发内容，都有哪些属性？", "Q": "title,path,imageUrl"},' +
+                  '{"A": "data 是页面第一次渲染使用的初始数据。页面加载时，data将会以JSON字符串的形式由逻辑层传至渲染层，因此data中的数据必须是可以转成JSON的类型：字符串，数字，布尔值，对象，数组。渲染层可以通过WXML对数据进行绑定。", "Q": "√"},' +
+                  '{"A": "Page中还可以定义组件事件处理函数。在渲染层的组件中加入事件绑定，当事件被触发时，就会执行Page中定义的事件处理函数。", "Q": "√"},' +
+                  '{"A": "setData所设置的key，必须要在data中预先定义，否则会产生运行时错误。", "Q": "×"},' +
+                  '{"A": "App()必须在app.json中由框架调用，必须调用且只能调用一次。不然会出现无法预期的后果。", "Q": "×"},' +
+                  '{"A": "module是当前模块对象，有一个属性exports数据类型是Object模块向外暴露的对象，使用require引用该模块时可以获取", "Q": "√"},' +
+                  '{"A": "require(string path)函数用于引入模块，函数返回模块通过module.exports或exports暴露的接口。参数path，类型是String，是需要引入模块文件相对于当前文件的相对路径，或npm模块名，或npm模块路径。支持绝对路径。", "Q": "×"},' +
+                  '{"A": "可以在App.onLaunch生命周期回调函数中的时候调用getCurrentPages()，此时page已经生成。", "Q": "×"}]';
+ 
+
+ // 将JSON编码的字符串转换为JS对象
+
+ var obj = JSON.parse(json);
+
+ function aS(){
+ 	 var ipt=document.getElementById("put");
+     var divs=document.getElementById("div");
+      for (var i =0; i < json.length; i++) {
+        // document.write(obj[i].A+"</br>");
+
+           if(obj[i].A==ipt.value){
+           	divs.innerHTML=obj[i].Q;
+           }
+      }
+
+ }
+ function re(){
+     var ipt=document.getElementById("put");
+
+     var divs=document.getElementById("div");
+     ipt.value=null;
+     divs.innerHTML=null;
+ }
+ 
+
+ // 从JS对象访问单个值
+
+
+
+ </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
