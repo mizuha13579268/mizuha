@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private float m_AvoidPathOffset;          // direction (-1 or 1) in which to offset path to avoid other car, whilst avoiding
         private Rigidbody m_Rigidbody;
 
-        private GameObject[] poss = new GameObject[48];
+        private GameObject[] poss = new GameObject[58];
         private int nextPos = 0;
 
         private void Awake()
@@ -59,34 +59,12 @@ namespace UnityStandardAssets.Vehicles.Car
             m_Rigidbody = GetComponent<Rigidbody>();
         }
 
-        void Start()
-        {
-            GetPoss();
-        }
-
-        private void GetPoss()
-        {
-            int a = 101;
-            while (a < 149)
-            {
-                GameObject g = GameObject.Find("pos" + a);
-                if (g != null)
-                {
-                    poss[a - 101] = g;
-                    a++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
 
         private void FixedUpdate()
         {
             if (m_Target == null || !m_Driving)
             {
-                if (nextPos < 48)
+                if (nextPos < 58)
                 {
                     SetTarget(poss[nextPos].transform);
                     nextPos++;
@@ -96,7 +74,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     // Car should not be moving,
                     // use handbrake to stop
                     m_CarController.Move(0, 0, -1f, 1f);
-                }
+                }                
             }
             else
             {
@@ -248,6 +226,29 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             m_Target = target;
             m_Driving = true;
+        }
+
+        private void Start()
+        {
+            GetPoss();
+        }
+
+        private void GetPoss()
+        {
+            int a = 101;
+            while (a < 159)
+            {
+                GameObject g = GameObject.Find("poss" + a);
+                if (g != null)
+                {
+                    poss[a - 101] = g;
+                    a++;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
     }
 }

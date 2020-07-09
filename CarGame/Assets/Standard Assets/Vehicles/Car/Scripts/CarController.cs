@@ -59,7 +59,6 @@ namespace UnityStandardAssets.Vehicles.Car
         public GameObject rightLight;
         private Light leftLightColor;
         private Light rightLightColor;
-
         // Use this for initialization
         private void Start()
         {
@@ -151,7 +150,7 @@ namespace UnityStandardAssets.Vehicles.Car
             BrakeInput = footbrake = -1*Mathf.Clamp(footbrake, -1, 0);
             handbrake = Mathf.Clamp(handbrake, 0, 1);
 
-            if (BrakeInput > 0f)
+            if(BrakeInput > 0f)
             {
                 leftLightColor.color = Color.red;
                 rightLightColor.color = Color.red;
