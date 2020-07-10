@@ -49,7 +49,23 @@ namespace UnityStandardAssets.Vehicles.Car
             m_Car.Move(h, v, v, handbrake,isCan, isTurnLeft, isTurnRight);
           
 #else
-            m_Car.Move(h, v, v, 0f);
+           if (h < 0)
+            {
+                isTurnLeft = true;
+            }
+            else
+            {
+                isTurnLeft = false;
+            }
+            if (h > 0)
+            {
+                isTurnRight = true;
+            }
+            else
+            {
+                isTurnRight = false;
+            }
+            m_Car.Move(h, v, v, 0f,isCan, isTurnLeft, isTurnRight);
 #endif
         }
 
