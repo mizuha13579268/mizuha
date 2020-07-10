@@ -11,7 +11,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private GameObject firstCamera, thirdCamera;
         private bool isFirstPersonView = false;
-
+        private bool isCan = true;
+        private bool isTurnLeft = false;
+        private bool isTurnRight = false;
         private void Awake()
         {
             // get the car controller
@@ -28,7 +30,24 @@ namespace UnityStandardAssets.Vehicles.Car
             float v = CrossPlatformInputManager.GetAxis("Vertical");
 #if !MOBILE_INPUT
             float handbrake = CrossPlatformInputManager.GetAxis("Jump");
-            m_Car.Move(h, v, v, handbrake);
+            if (h < 0)
+            {
+                isTurnLeft = true;
+            }
+            else
+            {
+                isTurnLeft = false;
+            }
+            if (h > 0)
+            {
+                isTurnRight = true;
+            }
+            else
+            {
+                isTurnRight = false;
+            }
+            m_Car.Move(h, v, v, handbrake,isCan, isTurnLeft, isTurnRight);
+          
 #else
             m_Car.Move(h, v, v, 0f);
 #endif
@@ -36,11 +55,20 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void Update()
         {
+            
             if (Input.GetKeyDown(KeyCode.V))
             {
                 isFirstPersonView = !isFirstPersonView;
             }
-
+            if ((Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.DownArrow))
+                || (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)))
+            {
+                isCan = false;
+            }
+            else
+            {
+                isCan = true;
+            }
             if (isFirstPersonView)
             {
                 firstCamera.SetActive(true);

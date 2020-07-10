@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -31,7 +32,7 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_MaxHandbrakeTorque;
         [SerializeField] private float m_Downforce = 100f;
         [SerializeField] private SpeedType m_SpeedType;
-        [SerializeField] private float m_Topspeed = 200;
+        [SerializeField] private static float m_Topspeed = 200;
         [SerializeField] private static int NoOfGears = 5;
         [SerializeField] private float m_RevRangeBoundary = 1f;
         [SerializeField] private float m_SlipLimit;
@@ -50,7 +51,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
-        public float CurrentSpeed{ get { return m_Rigidbody.velocity.magnitude*2.23693629f; }}
+        public float CurrentSpeed{ get { return m_Rigidbody.velocity.magnitude * 2.23693629f; } }
         public float MaxSpeed{get { return m_Topspeed; }}
         public float Revs { get; private set; }
         public float AccelInput { get; private set; }
@@ -133,8 +134,36 @@ namespace UnityStandardAssets.Vehicles.Car
         }
 
 
-        public void Move(float steering, float accel, float footbrake, float handbrake)
+        public void Move(float steering, float accel, float footbrake, float handbrake,bool isCan,bool isTurnLeft,bool isTurnRight)
         {
+            if (isTurnLeft)
+            {
+                
+                StartCoroutine(ShanSuoLeft());
+            }
+            if (isTurnRight)
+            {
+                
+                StartCoroutine(ShanSuoRight());
+            }
+            if (!isTurnLeft && !isTurnRight)
+            {
+                leftLightColor.color = Color.yellow;
+                rightLightColor.color = Color.yellow;
+            }
+            if (!isCan)
+            {
+                leftLightColor.color = Color.red;
+                rightLightColor.color = Color.red;
+                m_Rigidbody.isKinematic = true;
+                return;
+            }
+            else
+            {
+
+                m_Rigidbody.isKinematic = false;
+
+            }
             for (int i = 0; i < 4; i++)
             {
                 Quaternion quat;
@@ -157,10 +186,10 @@ namespace UnityStandardAssets.Vehicles.Car
             }
             else
             {
-                leftLightColor.color = Color.yellow;
-                rightLightColor.color = Color.yellow;
+                //leftLightColor.color = Color.yellow;
+                //rightLightColor.color = Color.yellow;
             }
-
+            
             //Set the steer on the front wheels.
             //Assuming that wheels 0 and 1 are the front wheels.
             m_SteerAngle = steering*m_MaximumSteerAngle;
@@ -169,6 +198,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             SteerHelper();
             ApplyDrive(accel, footbrake);
+            
             CapSpeed();
 
             //Set the handbrake.
@@ -207,6 +237,7 @@ namespace UnityStandardAssets.Vehicles.Car
                     if (speed > m_Topspeed)
                         m_Rigidbody.velocity = (m_Topspeed/3.6f) * m_Rigidbody.velocity.normalized;
                     break;
+              
             }
         }
 
@@ -380,6 +411,26 @@ namespace UnityStandardAssets.Vehicles.Car
                 }
             }
             return false;
+        }
+        private IEnumerator ShanSuoLeft()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                leftLightColor.color = Color.red;
+                yield return new WaitForSeconds(0.2f);
+                leftLightColor.color = Color.yellow;
+            }
+          
+        }
+        private IEnumerator ShanSuoRight()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                rightLightColor.color = Color.red;
+                yield return new WaitForSeconds(0.2f);
+                rightLightColor.color = Color.yellow;
+            }
+           
         }
     }
 }

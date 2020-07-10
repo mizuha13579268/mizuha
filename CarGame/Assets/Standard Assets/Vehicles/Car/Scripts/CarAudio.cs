@@ -142,9 +142,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
                     // adjust the source volumes based on the fade values
                     m_LowAccel.volume = lowFade*accFade;
-                    m_LowDecel.volume = lowFade*decFade;
-                    m_HighAccel.volume = highFade*accFade;
-                    m_HighDecel.volume = highFade*decFade;
+                    m_LowDecel.volume = lowFade*decFade ;
+                    m_HighAccel.volume = highFade*accFade ;
+                    m_HighDecel.volume = highFade*decFade ;
 
                     // adjust the doppler levels
                     m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;

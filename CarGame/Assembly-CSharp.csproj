@@ -62,7 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameControls.cs" />
     <Compile Include="Assets\Scripts\SmoothFlow.cs" />
+    <Compile Include="Assets\Scripts\StartMenu.cs" />
     <None Include="Assets\Shaders\ShadowProjection.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/git/codegit/CarGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
